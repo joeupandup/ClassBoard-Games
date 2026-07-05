@@ -1,0 +1,43 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "classboard-games",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-07-05",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "upload_source_maps": true,
+  "vars": {
+    "APP_ORIGIN": "https://classboardgames.com",
+    "GAME_ORIGIN": "https://play.classboardgames.com",
+    "AUTH_MODE": "demo"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "classboard-games-db",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "GAME_ASSETS",
+      "bucket_name": "classboard-game-assets"
+    }
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "SCAN_QUEUE",
+        "queue": "classboard-scan-jobs"
+      }
+    ]
+  }
+}
